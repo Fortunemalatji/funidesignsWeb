@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .cart-container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #2c3e50;
+            letter-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #34495e;
+            color: #ecf0f1;
+            text-transform: uppercase;
+        }
+
+        td img {
+            width: 60px;
+            height: auto;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .product-name {
+            display: flex;
+            align-items: center;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            padding-right: 20px;
+            margin-top: 20px;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: grey;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+            color: #000;
+        }
+
+        .checkout-button:hover {
+            background-color: #f0f2f5;
+        }
+
+        .empty-cart {
+            text-align: center;
+            font-size: 20px;
+            color: #888;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Funi Designs</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="customization.html">Customize Furniture</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li>
+                    <a href="Cart.html">
+                        <box-icon name="cart" type="solid" flip="horizontal"></box-icon>
+                        <span class="cart-count" id="cart-count">3</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="dropdown">
+            <button class="dropbtn"><box-icon type='solid' name='user'></box-icon></button>
+            <div class="dropdown-content">
+                <a href="#" id="open-profile-modal">Update Profile</a>
+                <a href="orders.html">My orders</a>
+                <a href="index.html">LogOut</a>
+            </div>
+        </div>
+    </header>
+
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>User Profile</h1>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Update Profile</button>
+                    <button type="button" id="cancel-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <!-- <th>Total</th>-->
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+            </tbody>
+        </table>
+
+        <div id="cart-total" class="total"></div>
+
+        <button id="checkout" class="checkout-button">Proceed to Checkout</button>
+    </div>
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Message!</h2>
+            <p id="successMessage">Your action was successful.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="about-us">
+                <h3>About Us</h3>
+                <p>We provide high-quality custom furniture to match your unique style.</p>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">My Orders</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <h3>Follow Us</h3>
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="JS/javascript.js"></script>
+
+    <script>
+
+function popUp(message) {
+  const modal = document.getElementById("successModal");
+  const successMessage = document.getElementById("successMessage");
+  successMessage.textContent = message; 
+  modal.style.display = "block"; 
+
+  const closeButton = document.querySelector("#successModal .close");
+  closeButton.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+}
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalContainer = document.getElementById('cart-total');
+            const checkoutButton = document.getElementById('checkout');
+
+            function getCookie(name) {
+                const value = "; " + document.cookie;
+                const parts = value.split("; " + name + "=");
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+
+            const authToken = getCookie("sessionToken");
+
+            if (authToken) {
+                console.log("Token retrieved:", authToken);
+            } else {
+                console.log("No token found.");
+            }
+
+            function parseJwt(token) {
+                try {
+                    const base64Url = token.split(".")[1];
+                    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+                    const jsonPayload = decodeURIComponent(
+                        atob(base64)
+                            .split("")
+                            .map(function (c) {
+                                return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                            })
+                            .join("")
+                    );
+
+                    return JSON.parse(jsonPayload);
+                } catch (error) {
+                    console.error("Failed to parse JWT:", error);
+                    return null;
+                }
+            }
+
+
+            const decodedToken = parseJwt(authToken);
+            const user_ID = decodedToken ? decodedToken.user_ID : null;
+            console.log(user_ID);
+            let cartItems = [];
+            let total = 0;
+
+            // Fetch cart items
+            fetch(`http://localhost:5000/api/cart/${user_ID}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch cart items');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching cart items:', data.error);
+                        return;
+                    }
+
+                    if (data.message) {
+                        cartItemsContainer.innerHTML = '<tr><td colspan="4" class="empty-cart">Your cart is empty</td></tr>';
+                        cartTotalContainer.textContent = 'Total: $0.00';
+                        return;
+                    }
+
+                    cartItems = data;
+
+                    cartItems.forEach(item => {
+                        fetch(`http://localhost:5000/api/products/${item.prod_id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${authToken}`
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Failed to fetch product details');
+                                }
+                                return response.json();
+                            })
+                            .then(product => {
+                                const row = document.createElement('tr');
+
+                                const nameCell = document.createElement('td');
+                                nameCell.classList.add('product-name');
+                                const productImage = document.createElement('img');
+                                productImage.src = product.Image || 'placeholder.jpg';
+                                const productName = document.createElement('span');
+                                productName.textContent = product.prod_name;
+
+                                nameCell.appendChild(productImage);
+                                nameCell.appendChild(productName);
+
+                                const quantityCell = document.createElement('td');
+                                quantityCell.textContent = item.quantity;
+
+                                const priceCell = document.createElement('td');
+                                priceCell.textContent = `${item.price}`;
+
+                                const totalCell = document.createElement('td');
+                                const itemTotal = item.quantity * item.price;
+                                totalCell.textContent = `R${itemTotal.toFixed(2)}`;
+
+                                total += itemTotal;
+
+                                row.appendChild(nameCell);
+                                row.appendChild(quantityCell);
+                                row.appendChild(priceCell);
+                                //row.appendChild(totalCell);
+
+                                cartItemsContainer.appendChild(row);
+
+                                //cartTotalContainer.textContent = `Total: $${total.toFixed(2)}`;
+                            })
+                            .catch(error => console.error('Error fetching product details:', error));
+                    });
+                })
+                .catch(error => console.error('Error fetching cart items:', error));
+
+            checkoutButton.addEventListener('click', () => {
+                if (cartItems.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+
+                const productsArray = cartItems.map(item => ({
+                    prod_id: item.prod_id,
+                    quantity: item.quantity
+                }));
+
+                const orderData = {
+                    user_ID: user_ID,
+                    prod_ids: productsArray,
+                    order_date: new Date().toISOString().split('T')[0],
+                    TotalCost: total.toFixed(2)
+                };
+
+                console.log('Order Data:', orderData);
+
+                fetch('http://localhost:5000/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+
+                    },
+                    body: JSON.stringify(orderData)
+                })
+                    .then(response => {
+                        console.log('Response Status:', response.status);
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.error); });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Order response data:', data);
+                        popUp('Order placed successfully! Your order ID is ' + data.orderID);
+                    })
+                    .catch(error => console.error('Error posting order:', error));
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>

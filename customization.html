@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang=" en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Furniture</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .btn1 {
+            margin: 15px;
+            justify-content: space-between;
+            align-items: center;
+            display: flex;
+            padding: 20px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #333;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Styling for the links when hovered */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Button hover effect */
+        .nav-list li a:hover,
+        .dropbtn:hover {
+            background-color: #575757;
+        }
+
+        li {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Funi Designs</div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="customization.html">Customize Furniture</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li>
+                    <a href="Cart.html">
+                        <box-icon name="cart" type="solid" flip="horizontal"></box-icon>
+                        <span class="cart-count" id="cart-count">3</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="dropdown">
+            <button class="dropbtn"><box-icon type='solid' name='user'></box-icon></button>
+            <div class="dropdown-content">
+                <a href="#" id="open-profile-modal">Update Profile</a>
+                <a href="orders.html">My orders</a>
+                <a href="index.html">LogOut</a>
+            </div>
+        </div>
+    </header>
+
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>User Profile</h1>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Update Profile</button>
+                    <button type="button" id="cancel-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Customize Furniture Section -->
+    <section class="customize-furniture">
+        <h1>Customize Your Furniture</h1>
+        <p>Choose your product and customize it to fit your style.</p>
+        <div class="container">
+
+            <!-- Product Details Display -->
+            <div id="product-details" class="customization-options">
+                <!-- Product image and details will be inserted here by JavaScript -->
+
+            </div>
+
+            <!-- Customization Form -->
+            <section class="customization-form">
+                <h2>Customize Your Selection</h2>
+                <form id="customization-form">
+                    <label for="Image">custom component:</label>
+                    <select id="image" name="color">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <label for="material">Select Material:</label>
+                    <select id="material" name="material">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+
+                    <label for="color">Select Color:</label>
+                    <select id="color" name="color">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <div class="btn1">
+                        <button type="submit" class="cta-button">Save</button>
+                        <button type="button" id="add-to-cart" class="cta-button">Add to Cart</button>
+                    </div>
+
+
+
+                </form>
+            </section>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="script.js"></script>
+    <script src="JS/javascript.js"></script>
+
+
+    <script>
+
+        function parseJwt(token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            } catch (error) {
+                console.error('Failed to parse JWT:', error);
+                return null;
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                console.error('Product ID is missing');
+                return;
+            }
+
+            fetch(`http://localhost:5000/api/products/${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    if (product.res === 'no-results') {
+                        console.error('Product not found');
+                        return;
+                    }
+
+                    const productType = product.prod_type; 
+                    return fetch(`http://localhost:5000/api/matched-items?type=${encodeURIComponent(productType)}`);
+                })
+                .then(response => response.json())
+                .then(items => {
+                    if (items.res === 'error') {
+                        console.error('Error fetching matched items');
+                        return;
+                    }
+
+                    const materialSelect = document.getElementById('material');
+                    const colorSelect = document.getElementById('color');
+                    const imageSelect = document.getElementById('image');
+
+                    // Clear existing options
+                    materialSelect.innerHTML = '';
+                    colorSelect.innerHTML = '';
+
+                    // Populate the material dropdown
+                    const uniqueMaterials = [...new Set(items.map(item => item.material))];
+                    uniqueMaterials.forEach(material => {
+                        const option = document.createElement('option');
+                        option.value = material;
+                        option.textContent = material.charAt(0).toUpperCase() + material.slice(1);
+                        materialSelect.appendChild(option);
+                    });
+
+                    // Populate the color dropdown
+                    const uniqueColors = [...new Set(items.map(item => item.color))];
+                    uniqueColors.forEach(color => {
+                        const option = document.createElement('option');
+                        option.value = color;
+                        option.textContent = color.charAt(0).toUpperCase() + color.slice(1);
+                        colorSelect.appendChild(option);
+                    });
+
+                    const uniqueimage = [...new Set(items.map(item => item.image))];
+                    uniqueimage.forEach(image => {
+                        const option = document.createElement('option');
+                        option.value = image;
+                        option.textContent = image.charAt(0).toUpperCase() + image.slice(1);
+                        imageSelect.appendChild(option);
+
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching product or matched items:', error);
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+
+            if (productId) {
+                fetch(`http://localhost:5000/api/products/${productId}`)
+                    .then(response => response.json())
+                    .then(product => {
+                        const productDetails = document.getElementById('product-details');
+
+                        const productImage = document.createElement('img');
+                        productImage.src = product.Image;
+                        productImage.alt = product.prod_name;
+
+                        const productName = document.createElement('h2');
+                        productName.textContent = product.prod_name;
+
+                        const productDescription = document.createElement('p');
+                        productDescription.textContent = product.description;
+
+                        const productPrice = document.createElement('p');
+                        productPrice.innerHTML = `<strong>Price: R${product.prod_price}</strong>`;
+
+                        productDetails.appendChild(productImage);
+                        productDetails.appendChild(productName);
+                        productDetails.appendChild(productDescription);
+                        productDetails.appendChild(productPrice);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching product:', error);
+                    });
+            }
+
+            // Event listener for Save Customization button
+            document.getElementById('customization-form').addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent the default form submission
+
+                function getCookie(name) {
+                    const value = "; " + document.cookie;
+                    const parts = value.split("; " + name + "=");
+                    if (parts.length === 2) return parts.pop().split(";").shift();
+                }
+
+                const authToken = getCookie("sessionToken");
+
+                if (authToken) {
+                    console.log("Token retrieved:", authToken);
+                } else {
+                    console.log("No token found.");
+                }
+
+                const productId = new URLSearchParams(window.location.search).get('id');
+                const cus_Type = 'Furniture'; // Adjust as needed
+                const cus_Option = 'Customize'; // Adjust as needed
+                const components = {
+                    material: document.getElementById('material').value,
+                    color: document.getElementById('color').value,
+                    image: document.getElementById('image').value
+                };
+
+                fetch('http://localhost:5000/api/addCustomization', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken // Include the token in the Authorization header
+                    },
+                    body: JSON.stringify({ prod_ID: productId, cus_Type, cus_Option, components })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error adding customization:', data.error);
+                        } else {
+                            console.log('Customization added successfully:', data);
+                            // Optionally, redirect or show a success message
+                            alert('successfully added!');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+            function getCookie(name) {
+                const value = "; " + document.cookie;
+                const parts = value.split("; " + name + "=");
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+
+            const authToken = getCookie("sessionToken");
+
+            if (authToken) {
+                console.log("Token retrieved:", authToken);
+            } else {
+                console.log("No token found.");
+            }
+
+            // Event listener for Add to Cart button
+            document.getElementById('add-to-cart').addEventListener('click', () => {
+
+
+
+                const productId = new URLSearchParams(window.location.search).get('id');
+                console.log(productId);
+                const quantity = 1; // Adjust as needed
+
+                // Ensure that price is extracted correctly from the product details
+                const priceElement = document.querySelector('#product-details p strong');
+                const price = priceElement ? priceElement.textContent.replace('Price: $', '') : null;
+
+                if (!productId || !quantity || !price) {
+                    console.error('Product ID, quantity, and price are required');
+                    return;
+                }
+
+                const decodedToken = parseJwt(authToken);
+                const user_ID = decodedToken ? decodedToken.user_ID : null;
+                const prod_id = productId ? parseInt(productId) : null;
+
+                if (!prod_id) {
+                    console.error('Product ID is missing or invalid');
+                    return;
+                }
+
+                if (!user_ID) {
+                    console.error('Failed to extract user_ID from the token');
+                    return;
+                }
+
+                const data = {
+                    user_ID: user_ID,
+                    prod_id: prod_id,
+                    quantity: quantity,
+                    price: price
+                };
+
+                fetch('http://localhost:5000/api/AddTocart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken // Include the token in the Authorization header
+                    },
+                    body: JSON.stringify(data) // user_ID is excluded
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error adding to cart:', data.error);
+                        } else {
+                            console.log('Item added to cart successfully:', data);
+                            // Optionally, redirect or show a success message
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+
+
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting and Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #reporting-content {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9; /* Light background for better contrast */
+            color: #333; /* Dark text for readability */
+        }
+
+        .report-section {
+            margin-bottom: 30px;
+        }
+
+        .report-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+            border-bottom: 2px solid #ddd; /* Underline for section headings */
+            padding-bottom: 5px;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between charts */
+        }
+
+        .chart {
+            flex: 1 1 calc(50% - 20px); /* 2 columns layout with spacing */
+            box-sizing: border-box;
+            background-color: #fff; /* White background for charts */
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Rounded corners for charts */
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .chart h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .chart canvas {
+            width: 100% !important; /* Ensure the chart fills the container */
+            height: 300px; /* Adjust height for better visibility */
+        }
+
+        #inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff; /* White background for table */
+            border: 1px solid #ddd; /* Border around the table */
+        }
+
+        #inventory-table th,
+        #inventory-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 0.9em; /* Adjust font size for readability */
+        }
+
+        #inventory-table th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .report-section {
+                margin-bottom: 20px;
+            }
+
+            #inventory-table th,
+            #inventory-table td {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+
+            .chart {
+                flex: 1 1 100%; /* Full width on small screens */
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="reporting-content">
+        <div class="report-section">
+            <h2>Inventory Levels</h2>
+            <table id="inventory-table">
+                <!-- Table content will be dynamically added here -->
+            </table>
+        </div>
+
+        <div class="report-section">
+            <h2>Sales Trends</h2>
+            <div class="chart-container">
+                <div class="chart">
+                    <h3>Sales Over Time</h3>
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="chart">
+                    <h3>Top Products</h3>
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+                <div class="chart">
+                    <h3>Component Popularity</h3>
+                    <canvas id="componentPopularityChart"></canvas>
+                </div>
+                <div class="chart">
+                    <h3>New Chart Placeholder</h3>
+                    <canvas id="newChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctxSales = document.getElementById('salesChart').getContext('2d');
+            const ctxTopProducts = document.getElementById('topProductsChart').getContext('2d');
+            const ctxComponentPopularity = document.getElementById('componentPopularityChart').getContext('2d');
+            const ctxNewChart = document.getElementById('newChart').getContext('2d');
+
+            // Dummy data for Sales Trends
+            new Chart(ctxSales, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May'],
+                    datasets: [{
+                        label: 'Sales Trends',
+                        data: [100, 200, 150, 300, 250],
+                        backgroundColor: 'rgba(153, 102, 255, 0.4)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e3e6f0'
+                            },
+                            ticks: {
+                                color: '#666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: '#e3e6f0'
+                            },
+                            ticks: {
+                                color: '#666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dummy data for Top Products
+            new Chart(ctxTopProducts, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+                    datasets: [{
+                        label: 'Top Products',
+                        data: [50, 20, 15, 15],
+                        backgroundColor: [
+                            'rgba(255, 159, 64, 0.4)',
+                            'rgba(255, 99, 132, 0.4)',
+                            'rgba(54, 162, 235, 0.4)',
+                            'rgba(75, 192, 192, 0.4)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dummy data for Component Popularity
+            new Chart(ctxComponentPopularity, {
+                type: 'pie',
+                data: {
+                    labels: ['Component A', 'Component B', 'Component C', 'Component D'],
+                    datasets: [{
+                        label: 'Component Popularity',
+                        data: [40, 25, 20, 15],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.4)',
+                            'rgba(54, 162, 235, 0.4)',
+                            'rgba(255, 206, 86, 0.4)',
+                            'rgba(75, 192, 192, 0.4)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Dummy data for New Chart Placeholder
+            new Chart(ctxNewChart, {
+                type: 'bar',
+                data: {
+                    labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4'],
+                    datasets: [{
+                        label: 'New Chart Data',
+                        data: [30, 40, 50, 60],
+                        backgroundColor: 'rgba(75, 192, 192, 0.4)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e3e6f0'
+                            },
+                            ticks: {
+                                color: '#666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: '#e3e6f0'
+                            },
+                            ticks: {
+                                color: '#666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

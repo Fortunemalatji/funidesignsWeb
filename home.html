@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Customization System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Funi Designs</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="customization.html">Customize Furniture</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li>
+                    <a href="Cart.html">
+                        <box-icon name="cart" type="solid" flip="horizontal"></box-icon>
+                        <span class="cart-count" id="cart-count">3</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="dropdown">
+            <button class="dropbtn"><box-icon type='solid' name='user' style="color:#fff"></box-icon></button>
+            <div class="dropdown-content">
+                <a href="#" id="open-profile-modal">Update Profile</a>
+                <a href="orders.html">My orders</a>
+                <a href="index.html">LogOut</a>
+            </div>
+        </div>
+    </header>
+
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>User Profile</h1>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Update Profile</button>
+                    <button type="button" id="cancel-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Design Your Dream Furniture</h1>
+            <p>Create custom furniture that fits your style and needs.</p>
+            <a href="shop.html" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="product-grid">
+        </div>
+    </section>
+
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>1. Choose a Product</h3>
+                <p>Select from our wide range of customizable furniture.</p>
+            </div>
+            <div class="step">
+                <h3>2. Customize It</h3>
+                <p>Add your personal touch with our easy-to-use tools.</p>
+            </div>
+            <div class="step">
+                <h3>3. Place Your Order</h3>
+                <p>Confirm your design and place your order securely.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial">
+                <p>"I love my new custom sofa! It fits perfectly in my living room."</p>
+                <p>- Jane Doe</p>
+            </div>
+            <div class="testimonial">
+                <p>"The design process was so easy, and the final product is amazing!"</p>
+                <p>- John Smith</p>
+            </div>
+            <div class="testimonial">
+                <p>"Highly recommend this service for anyone looking to add a personal touch to their home."</p>
+                <p>- Emily Brown</p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="about-us">
+                <h3>About Us</h3>
+                <p>We provide high-quality custom furniture to match your unique style.</p>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">My Orders</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <h3>Follow Us</h3>
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="JS/javascript.js"></script>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script>
+
+    </script>
+
+</body>
+
+</html>

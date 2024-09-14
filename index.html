@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Funi Designs</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="profile-icon">
+            <button id="openModal"><box-icon name='log-in' flip='vertical'></box-icon></button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Design Your Dream Furniture</h1>
+            <p>Create custom furniture that fits your style and needs.</p>
+            <a href="shop.html" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </section>
+
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>1. Choose a Product</h3>
+                <p>Select from our wide range of customizable furniture.</p>
+            </div>
+            <div class="step">
+                <h3>2. Customize It</h3>
+                <p>Add your personal touch with our easy-to-use tools.</p>
+            </div>
+            <div class="step">
+                <h3>3. Place Your Order</h3>
+                <p>Confirm your design and place your order securely.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial">
+                <p>"I love my new custom sofa! It fits perfectly in my living room."</p>
+                <p>- Jane Doe</p>
+            </div>
+            <div class="testimonial">
+                <p>"The design process was so easy, and the final product is amazing!"</p>
+                <p>- John Smith</p>
+            </div>
+            <div class="testimonial">
+                <p>"Highly recommend this service for anyone looking to add a personal touch to their home."</p>
+                <p>- Emily Brown</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <!-- Login Form -->
+            <div class="form-container login-container">
+                <form id="loginForm" action="/login" method="POST">
+                    <h2>Login</h2>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <p class="toggle-link"><a href="#" id="forgotPassword">Forgot Password</a></p>
+                    <button type="submit" class="btn">Login</button>
+                    <p class="toggle-link">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+                </form>
+            </div>
+            <!-- Register Form -->
+            <div class="form-container register-container hidden">
+                <form id="registerForm" action="/register" method="POST">
+                    <h2>Register</h2>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerName" placeholder="First Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerSurname" placeholder="Last Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="registerPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerAddress" placeholder="Address" required>
+                    </div>
+                    <select class="input-group-select" name="" id="option">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        <option value="clerk">Clerk</option>
+                        <option value="manager">Manager</option>
+                    </select>
+
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerPassword" placeholder="Password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerConfPass" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                    <p class="toggle-link">Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Success!</h2>
+            <p id="successMessage">Your action was successful.</p>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="about-us">
+                <h3>About Us</h3>
+                <p>We provide high-quality custom furniture to match your unique style.</p>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <h3>Follow Us</h3>
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="JS/javascript.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("modal");
+  const openModalButton = document.getElementById("openModal");
+  const closeModalButton = document.getElementById("closeModal");
+  const loginContainer = document.querySelector(".login-container");
+  const registerContainer = document.querySelector(".register-container");
+  const showLogin = document.getElementById("showLogin");
+  const showRegister = document.getElementById("showRegister");
+
+  openModalButton.addEventListener("click", function () {
+    modal.style.display = "flex";
+  });
+
+  closeModalButton.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Switch to Register Form
+  showRegister.addEventListener("click", function (e) {
+    e.preventDefault();
+    loginContainer.classList.add("hidden");
+    registerContainer.classList.remove("hidden");
+  });
+
+  // Switch to Login Form
+  showLogin.addEventListener("click", function (e) {
+    e.preventDefault();
+    registerContainer.classList.add("hidden");
+    loginContainer.classList.remove("hidden");
+  });
+
+  // Function to save token in cookie
+  const saveTokenInCookie = (token) => {
+    const expirationDays = 1;
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + expirationDays);
+
+    // Save the token in the cookie
+    document.cookie = `sessionToken=${token}; expires=${expirationDate.toUTCString()}; path=/`;
+
+    // Decode the token to check userType
+    const decodedToken = parseJwt(token);
+    const userType = decodedToken ? decodedToken.userType : null;
+
+    // Redirect based on userType
+    if (userType === "admin") {
+      window.location.href = "Dashboard.html";
+    } else if (userType === "user") {
+      window.location.href = "home.html";
+    } else if(userType==="manager") {
+        window.location.href = "manager.html";
+    }else if(userType.href === "clerk"){
+        window.location.href = "clerk.html";
+    }else{
+        console.error("Invalid userType detected");
+    }
+  };
+
+  // Function to decode JWT
+  const parseJwt = (token) => {
+    try {
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error("Failed to parse JWT:", error);
+      return null;
+    }
+  };
+
+  // Handle Login Form Submission
+  const loginForm = document.getElementById("loginForm");
+  loginForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful login
+        popUp("Login successful!");
+        saveTokenInCookie(data.token);
+        modal.style.display = "none";
+        window.location("home.html");
+      } else {
+        popUp(data.error || "Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  });
+
+  // Handle Register Form Submission
+  const registerForm = document.getElementById("registerForm");
+  registerForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("registerName").value.trim();
+    const surname = document.getElementById("registerSurname").value.trim();
+    const email = document.getElementById("registerEmail").value.trim();
+    const phone = document.getElementById("registerPhone").value.trim();
+    const address = document.getElementById("registerAddress").value.trim();
+    const password = document.getElementById("registerPassword").value.trim();
+    const confPassword = document
+      .getElementById("registerConfPass")
+      .value.trim();
+    const type = document.getElementById("option").value.trim();
+
+    // Ensure no fields are empty
+    if (
+      !name ||
+      !surname ||
+      !email ||
+      !phone ||
+      !address ||
+      !password ||
+      !confPassword
+    ) {
+      popUp("All fields are required.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/Register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          surname,
+          email,
+          phone,
+          Address: address,
+          password,
+          confPassword,
+          userType: type,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        popUp("Registration successful!");
+        saveTokenInCookie(data.token);
+        registerContainer.classList.add("hidden");
+        //loginContainer.classList.remove("hidden");
+        loginContainer.classList.add("hidden");
+        
+      } else {
+        popUp(data.error || "Registration failed");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  });
+});
+    </script>
+</body>
+
+</html>

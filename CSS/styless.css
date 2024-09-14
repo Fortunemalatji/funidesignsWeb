@@ -1,0 +1,281 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5dc;
+}
+
+header {
+  background-color: #964B00;
+  color: #fff;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  width: calc(100% - 2px); 
+  width: "100%";
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin-left: 40%;
+}
+
+.profile-btn {
+  background-color: #788F3C;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5%;
+}
+
+.profile-btn:hover {
+  background-color: #777;
+}
+
+.dashboard {
+  display: flex;
+  margin-top: 60px;
+}
+
+.sidebar {
+  width: 250px;
+  background-color:#964B00;
+  color: #fff;
+  height: calc(100vh - 60px);
+  padding: 20px;
+  padding-left: -5%;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  font-weight: bolder;
+}
+.sidebar ul li a i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.sidebar a.active {
+  background-color: #788F3C;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 20px;
+  padding: 10px;
+}
+
+.logout {
+  margin-top: auto;
+}
+
+.logout a {
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 5px;
+  margin-top: 75%;
+}
+
+.logout a:hover {
+  background-color: #d32f2f;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  flex: 1;
+}
+
+#content {
+  background-color: #fff;
+  padding: 20px;
+  padding-left: 5%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.dashboard-stats .stat {
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dashboard-stats .stat h3 {
+  margin: 0 0 10px;
+}
+
+.dashboard-stats .stat p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.dashboard-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat {
+  width: 30%;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#reporting-content {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Light background for better contrast */
+  color: #333; /* Dark text for readability */
+}
+
+.report-section {
+  margin-bottom: 30px;
+}
+
+.report-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+  border-bottom: 2px solid #ddd; /* Underline for section headings */
+  padding-bottom: 5px;
+}
+
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between charts */
+}
+
+.chart {
+  flex: 1 1 calc(50% - 20px); /* 2 columns layout with spacing */
+  box-sizing: border-box;
+  background-color: #fff; /* White background for charts */
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounded corners for charts */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.chart h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.chart canvas {
+  width: 100% !important; /* Ensure the chart fills the container */
+  height: 300px; /* Adjust height for better visibility */
+}
+
+#inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff; /* White background for table */
+  border: 1px solid #ddd; /* Border around the table */
+}
+
+#inventory-table th,
+#inventory-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  font-size: 0.9em; /* Adjust font size for readability */
+}
+
+#inventory-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .report-section {
+    margin-bottom: 20px;
+  }
+
+  #inventory-table th,
+  #inventory-table td {
+    padding: 8px;
+    font-size: 0.8em;
+  }
+
+  .chart {
+    flex: 1 1 100%; /* Full width on small screens */
+    height: 250px;
+  }
+}
