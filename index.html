@@ -42,7 +42,6 @@
     <section class="featured-products">
         <h2>Featured Products</h2>
         <div class="product-grid" id="product-grid">
-            <!-- Products will be dynamically inserted here -->
         </div>
     </section>
 
@@ -153,7 +152,6 @@
         </div>
     </div>
 
-    <!-- Success Modal -->
     <div id="successModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -163,7 +161,6 @@
     </div>
 
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="about-us">
@@ -213,48 +210,40 @@
     }
   });
 
-  // Switch to Register Form
   showRegister.addEventListener("click", function (e) {
     e.preventDefault();
     loginContainer.classList.add("hidden");
     registerContainer.classList.remove("hidden");
   });
 
-  // Switch to Login Form
   showLogin.addEventListener("click", function (e) {
     e.preventDefault();
     registerContainer.classList.add("hidden");
     loginContainer.classList.remove("hidden");
   });
 
-  // Function to save token in cookie
   const saveTokenInCookie = (token) => {
     const expirationDays = 1;
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + expirationDays);
 
-    // Save the token in the cookie
     document.cookie = `sessionToken=${token}; expires=${expirationDate.toUTCString()}; path=/`;
-
-    // Decode the token to check userType
     const decodedToken = parseJwt(token);
     const userType = decodedToken ? decodedToken.userType : null;
 
-    // Redirect based on userType
-    if (userType === "admin") {
-      window.location.href = "Dashboard.html";
+    if (userType === "clerk") {
+      window.location.href = "mockdash.html";
     } else if (userType === "user") {
       window.location.href = "home.html";
     } else if(userType==="manager") {
-        window.location.href = "manager.html";
-    }else if(userType.href === "clerk"){
-        window.location.href = "clerk.html";
-    }else{
+        window.location.href = "mockdash.html";
+    }else if(userType === "admin"){
+        window.location.href = "mockdash.html";
+    }else if(userType===null){
         console.error("Invalid userType detected");
     }
   };
 
-  // Function to decode JWT
   const parseJwt = (token) => {
     try {
       const base64Url = token.split(".")[1];
@@ -275,7 +264,6 @@
     }
   };
 
-  // Handle Login Form Submission
   const loginForm = document.getElementById("loginForm");
   loginForm.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -295,7 +283,6 @@
       const data = await response.json();
 
       if (response.ok) {
-        // Handle successful login
         popUp("Login successful!");
         saveTokenInCookie(data.token);
         modal.style.display = "none";
@@ -308,7 +295,6 @@
     }
   });
 
-  // Handle Register Form Submission
   const registerForm = document.getElementById("registerForm");
   registerForm.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -324,7 +310,6 @@
       .value.trim();
     const type = document.getElementById("option").value.trim();
 
-    // Ensure no fields are empty
     if (
       !name ||
       !surname ||
@@ -362,8 +347,7 @@
         popUp("Registration successful!");
         saveTokenInCookie(data.token);
         registerContainer.classList.add("hidden");
-        //loginContainer.classList.remove("hidden");
-        loginContainer.classList.add("hidden");
+        loginContainer.classList.add("block");
         
       } else {
         popUp(data.error || "Registration failed");

@@ -355,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
   const productGrid = document.querySelector(".product-grid");
 
-  fetch("http://localhost:5000/api/products")
+  fetch("http://localhost:5000/api/products-featured")
     .then((response) => response.json())
     .then((products) => {
       products.forEach((product) => {
@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Fetch products from the API
 document.addEventListener("DOMContentLoaded", () => {
-  const productGrid = document.querySelector(".product-grid");
+  const productGrid = document.querySelector(".product-grids");
 
   fetch("http://localhost:5000/api/products")
     .then((response) => response.json())
@@ -420,7 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
         productDescription.textContent = product.description;
 
         const productPrice = document.createElement("p");
-        productPrice.innerHTML = `<strong>Price: $${product.prod_price}</strong>`;
+        productPrice.innerHTML = `<strong>Price: R${product.prod_price}</strong>`;
 
         const button = document.createElement("button");
         button.textContent = "Customize";
@@ -481,8 +481,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
   const productGrid = document.getElementById("product-grid");
 
-  // Fetch products from API
-  fetch("http://localhost:5000/api/products", {
+  fetch("http://localhost:5000/api/featured-products", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -502,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Product image
         const productImg = document.createElement("img");
-        productImg.src = product.image || "placeholder.jpg"; // Fallback image
+        productImg.src = product.image || "placeholder.jpg"; 
         productImg.alt = product.prod_name;
 
         // Product name

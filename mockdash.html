@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #E9D8B7;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            margin: 10px 0;
+        }
+
+        .sidebar-menu a {
+            color: #3a3a3a;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            font-weight: bolder;
+        }
+
+        .sidebar-menu a:hover,
+        .active-sidebar {
+            background-color: #495057;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border-bottom: 2px solid #007bff;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            color: #007bff;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background-color: #e9ecef;
+        }
+
+        .tab-content {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            width: 80px;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .container {
+            margin: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .left,
+        .right {
+            width: 48%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #9a9797;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #000;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .order-container {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            clear: both;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        label {
+            font-weight: bold;
+            color: #222;
+            font-size: 16px;
+            margin-top: 15px;
+            display: block;
+        }
+
+        span {
+            color: #333;
+            font-size: 16px;
+        }
+
+        #update-status-button {
+            background-color: #3a3a3a;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        #update-status-button:hover {
+            background-color: #000;
+        }
+
+        .product-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .components-container {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .component {
+            background-color: #f0f8ff;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .component img {
+            width: 60px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .updatestatus {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95%;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            #update-status-button {
+                font-size: 14px;
+            }
+
+            p,
+            label,
+            span {
+                font-size: 16px;
+            }
+        }
+
+        #searchBar {
+            margin-left: 20px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .order-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .order-table th,
+        .order-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background-color: #f4f4f4;
+        }
+
+        .order-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: grey;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .popup h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .popup form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup form input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .popup .popup-footer {
+            text-align: right;
+        }
+
+        .popup .popup-footer button {
+            margin-left: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .chart-container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .chart-container h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .charts-container {
+            width: 80%;
+            max-width: 900px;
+        }
+
+        #chart2 {
+            max-width: auto;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .sales {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        select {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .stats-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex-basis: 22%;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3a3a3a;
+        }
+
+
+        .logout {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bolder;
+            margin: 10px;
+            font-size: x-large;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1 id="userT">Hello!</h1>
+        </div>
+        <ul class="sidebar-menu" id="menu">
+
+        </ul>
+        <a href="index.html" class="logout">Log Out</a>
+
+
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="dashboard-content">
+            <h2>Welcome to your dashboard</h2>
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <h2><strong>Sales</strong></h2>
+                    <p class="stat-value">R 50,000</p>
+                </div>
+                <div class="stat-card">
+                    <h2>Products Sold</h2>
+                    <p class="stat-value">350</p>
+                </div>
+                <div class="stat-card">
+                    <h2>Active Orders</h2>
+                    <p class="stat-value">25</p>
+                </div>
+                <div class="stat-card">
+                    <h2>Cancelled Orders</h2>
+                    <p class="stat-value">5</p>
+                </div>
+            </div>
+            <div id="dashboard-stats" class="grid-container">
+
+                <div class="chart-container" id="chart1">
+                    <h3>Chart 1: Sales Overview</h3>
+                    <canvas id="sales-chart"></canvas>
+                </div>
+                <div class="chart-container" id="chart2">
+                    <h3>Chart 2: Product Categories</h3>
+                    <canvas id="categories-chart"></canvas>
+                </div>
+                <div class="chart-container" id="chart3">
+                    <h3>Chart 3: Stock Levels</h3>
+                    <canvas id="stock-chart"></canvas>
+                </div>
+                <div class="chart-container" id="chart4">
+                    <h3>Chart 4: Revenue Trends</h3>
+                    <canvas id="revenue-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Components Table -->
+        <div class="tab-content" id="components-content" style="display:none;">
+            <h2>Components</h2>
+            <button onclick="openPopup('add-component-popup')">Add Component</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Material</th>
+                        <th>Color</th>
+                        <th>Image</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="components-table-body">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Products Table -->
+        <div class="tab-content" id="products-content" style="display:none;">
+            <h2>Products</h2>
+            <button onclick="openPopup('add-product-popup')">Add Product</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="products-table-body">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Profile Table -->
+        <div class="tab-content" id="profile-content" style="display:none;">
+            <h2>Profile</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="profile-table-body">
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-content" class="" id="orders-contents" style="display:none;">
+            <div class="order-header">
+                <h2>Orders</h2>
+                
+                <div class="order-info">
+                    <span id="order-count">Total Orders: 0</span>
+                    <input type="text" id="searchBar" placeholder="Search orders..." oninput="filterOrders()">
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User ID</th>
+                        <th>Product</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total Cost</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="order-Table-Body">
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-content" class="" id="reports-content" style="display:none;">
+            <h2>Reports</h2>
+
+            <div class="container">
+                <div class="left">
+                    <p>Active Orders: 36</p>
+                </div>
+                <div class="right">
+                    <p> Sales: R 265894.00 </p>
+                </div>
+            </div>
+            <div class="sales">
+                <select id="timelineSelector">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+
+                <div class="charts-container">
+                    <canvas id="businessBarChart"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--Add product pop up-->
+    <div id="add-product-popup" class="popup">
+        <h3>Add Product</h3>
+        <form id="add-product-form">
+            <label for="prod-type">Product Type:</label>
+            <input type="text" id="prod-type" name="prod-type" required>
+
+            <label for="prod-name">Product Name:</label>
+            <input type="text" id="prod-name" name="prod-name" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="prod-price">Price:</label>
+            <input type="number" id="prod-price" name="prod-price" step="0.01" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <label for="prod-image">Product Image:</label>
+            <input type="text" id="product-image" name="product-image" required>
+
+            <div class="popup-footer">
+                <button type="submit">Add Product</button>
+                <button type="button" onclick="closePopup('add-product-popup')">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Message!</h2>
+            <p id="successMessage">Your action was successful.</p>
+        </div>
+    </div>
+
+    <!--components pop up-->
+    <div id="add-component-popup" class="popup">
+        <h3>Add Component</h3>
+        <form id="add-component-form">
+            <label for="comp-name">Component Name:</label>
+            <input type="text" id="comp-name" required />
+
+            <label for="comp-type">Component Type:</label>
+            <select id="comp-type" required>
+                <option value="">Select a type</option>
+            </select>
+
+            <label for="material">Material:</label>
+            <input type="text" id="material" required />
+
+            <label for="color">Color:</label>
+            <input type="text" id="color" required />
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" required />
+
+            <label for="comp-image">Image:</label>
+            <input type="text" id="comp-image" required />
+
+            <div class="popup-footer">
+                <button type="submit">Add Component</button>
+                <button type="button" onclick="closePopup('add-component-popup')">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+    <div id="edit-product-popup" class="popup">
+        <h3>Edit Product</h3>
+        <form id="edit-product-form">
+            <label for="product-name">Name:</label>
+            <input type="text" id="product-name" name="product-name" required>
+            <label for="product-type">Type:</label>
+            <input type="text" id="product-type" name="product-type" required>
+            <label for="product-description">Description:</label>
+            <input type="text" id="product-description" name="product-description" required>
+            <label for="product-price">Price:</label>
+            <input type="number" step="0.01" id="product-price" name="product-price" required>
+            <label for="product-quantity">Quantity:</label>
+            <input type="number" id="product-quantity" name="product-quantity" required>
+            <div class="popup-footer">
+                <button type="submit">Save</button>
+                <button type="button" onclick="closePopup('edit-product-popup')">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="orderModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal">&times;</span>
+            <h2>Order Details</h2>
+            <label for="order-id">Order ID:</label>
+            <span id="order-id"></span>
+            <label for="prod_name">Product:</label>
+            <span id="prod_name"></span>
+            <label for="quant">Quantity:</label>
+            <span id="quant"></span>
+            <label for="total-price">Total Price:</label>
+            <span id="total-price"></span>
+            <label for="date">Order Date:</label>
+            <span id="date"></span>
+            <label for="status">Status:</label>
+            <span id="status"></span>
+
+            <div class="product-image">
+                <img id="order-image" style="display: none;" alt="Product Image">
+            </div>
+            <h3>Components:</h3>
+            <div id="components" class="components-container"></div>
+            <h3>Status:</h3>
+            <div class="updatestatus">
+                <select id="status-dropdown">
+                    <option value="Ready">Ready</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <button id="update-status-button">Update Status</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const modal = document.getElementById("orderModal");
+        const openModalButton = document.getElementById("open-order-modal");
+        const closeModalButton = document.querySelector(".close");
+        const closeButton = document.getElementById("close-button");
+        const statusMessage = document.getElementById("status-message");
+        const orderDetailsDiv = document.getElementById("order-details");
+
+        function popUp(message) {
+            const modal = document.getElementById("successModal");
+            const successMessage = document.getElementById("successMessage");
+            successMessage.textContent = message;
+            modal.style.display = "block";
+
+            const closeButton = document.querySelector("#successModal .close");
+            closeButton.onclick = function () {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        }
+
+    </script>
+    <script>
+        // Reference to the canvas and dropdown
+        const ctx = document.getElementById('businessBarChart').getContext('2d');
+        const timelineSelector = document.getElementById('timelineSelector');
+
+        // Initial data for each timeline
+        const chartData = {
+            daily: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                data: [30, 45, 25, 50, 70, 90, 55]
+            },
+            weekly: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                data: [200, 180, 220, 240]
+            },
+            monthly: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                data: [600, 700, 800, 900, 750, 850]
+            },
+            yearly: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                data: [4000, 4500, 5000, 5500, 6000]
+            }
+        };
+
+        // Function to create the chart
+        let businessBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartData.daily.labels,
+                datasets: [{
+                    label: 'Sales (in R1000s)',
+                    data: chartData.daily.data,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(75, 192, 192, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Sales in R1000s',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Timeline',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Sales Performance by Timeline',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Function to update chart data based on the selected timeline
+        function updateChart(timeline) {
+            const newData = chartData[timeline];
+            businessBarChart.data.labels = newData.labels;
+            businessBarChart.data.datasets[0].data = newData.data;
+            businessBarChart.update();
+        }
+
+        // Listen for changes in the timeline selector
+        timelineSelector.addEventListener('change', function () {
+            const selectedTimeline = this.value;
+            updateChart(selectedTimeline);
+        });
+    </script>
+
+
+    <script>
+        async function totalorders() {
+            const response = await fetch("http://localhost:5000/api/sumactiveorders");
+            const total = await response.json();
+            console.log(total);
+            document.getElementById('order-count').textContent = `Total Orders: ${total.activeOrderCount}`;
+
+        }
+        totalorders();
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        const authToken = getCookie('sessionToken');
+        const parseJwt = (token) => {
+            try {
+                const base64Url = token.split(".")[1];
+                const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+                const jsonPayload = decodeURIComponent(
+                    atob(base64)
+                        .split("")
+                        .map(function (c) {
+                            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                        })
+                        .join("")
+                );
+
+                return JSON.parse(jsonPayload);
+            } catch (error) {
+                console.error("Failed to parse JWT:", error);
+                return null;
+            }
+        };
+
+
+        const decodedToken = parseJwt(authToken);
+        const userType = decodedToken ? decodedToken.userType : null;
+        const userRole = userType;
+        console.log(userRole);
+        const welcome = document.getElementById("userT");
+        welcome.innerHTML = userRole;
+        const tabsByRole = {
+            'admin': [
+                { id: 'dashboard-tab', label: 'Dashboard', contentId: 'dashboard-content' },
+                { id: 'components-tab', label: 'Components', contentId: 'components-content' },
+                { id: 'products-tab', label: 'Products', contentId: 'products-content' },
+                { id: 'profile-tab', icon: 'fas fa-user', label: 'Profile', contentId: 'profile-content' }
+
+            ],
+            'clerk': [
+                { id: 'dashboard-tab', label: 'Dashboard', contentId: 'dashboard-content' },
+                { id: 'orders-tab', label: 'Orders', contentId: 'orders-contents' },
+                { id: 'profile-tab', label: 'Profile', contentId: 'profile-content' }
+            ],
+            'manager': [
+                { id: 'dashboard-tab', label: 'Dashboard', contentId: 'dashboard-content' },
+                { id: 'reports-tab', label: 'Reports', contentId: 'reports-content' },
+                { id: 'profile-tab', label: 'Profile', contentId: 'profile-content' }
+            ]
+        };
+
+        const userTabs = tabsByRole[userRole] || [];
+
+        const menu = document.getElementById('menu');
+
+        userTabs.forEach(tab => {
+            const menuItem = document.createElement('li');
+            const tabLink = document.createElement('a');
+            tabLink.id = tab.id;
+            tabLink.href = '#';
+            tabLink.textContent = tab.label;
+            tabLink.addEventListener('click', () => showTab(tab.contentId));
+
+            menuItem.appendChild(tabLink);
+            menu.appendChild(menuItem);
+        });
+
+        function showTab(contentId) {
+            const allContents = document.querySelectorAll('.tab-content');
+            allContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(contentId).style.display = 'block';
+        }
+
+
+
+
+        if (userTabs.length > 0) {
+            showTab(userTabs[0].contentId);
+        }
+        const ctxSales = document.getElementById('sales-chart').getContext('2d');
+        const salesChart = new Chart(ctxSales, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April'],
+                datasets: [{
+                    label: 'Sales Overview',
+                    data: [12, 19, 3, 5],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const ctxCategories = document.getElementById('categories-chart').getContext('2d');
+        const categoriesChart = new Chart(ctxCategories, {
+            type: 'pie',
+            data: {
+                labels: ['Category A', 'Category B', 'Category C'],
+                datasets: [{
+                    label: 'Product Categories',
+                    data: [30, 50, 20],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        const ctxStock = document.getElementById('stock-chart').getContext('2d');
+        const stockChart = new Chart(ctxStock, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April'],
+                datasets: [{
+                    label: 'Stock Levels',
+                    data: [10, 20, 30, 40],
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    fill: false
+                }]
+            }
+        });
+
+        const ctxRevenue = document.getElementById('revenue-chart').getContext('2d');
+        const revenueChart = new Chart(ctxRevenue, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April'],
+                datasets: [{
+                    label: 'Revenue Trends',
+                    data: [1000, 2000, 1500, 2500],
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        document.getElementById('add-product-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const prodType = document.getElementById('prod-type').value;
+            const prodName = document.getElementById('prod-name').value;
+            const description = document.getElementById('description').value;
+            const prodPrice = parseFloat(document.getElementById('prod-price').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const prodImage = document.getElementById('product-image').value;
+
+            const formData = new FormData();
+            formData.append('prod_type', prodType);
+            formData.append('prod_name', prodName);
+            formData.append('description', description);
+            formData.append('prod_price', prodPrice);
+            formData.append('quantity', quantity);
+            formData.append('Image', prodImage);
+
+            for (const [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+            try {
+                const response = await fetch('http://localhost:5000/api/products', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log(result.message);
+                    closePopup('add-product-popup');
+                } else {
+                    console.error(result.error);
+                    popUp('Error adding product: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Error adding product:', error);
+                popUp('Error adding product: ' + error.message);
+            }
+        });
+
+        async function populateComponentTypes() {
+            try {
+                const response = await fetch('http://localhost:5000/api/products-type');
+                const types = await response.json();
+
+                const compTypeSelect = document.getElementById('comp-type');
+                compTypeSelect.innerHTML = '<option value="">Select a type</option>';
+
+                types.forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type.prod_type;
+                    option.textContent = type.prod_type;
+                    compTypeSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching component types:', error);
+            }
+        }
+
+        populateComponentTypes();
+
+
+        document.getElementById('add-component-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const compName = document.getElementById('comp-name').value;
+            const compType = document.getElementById('comp-type').value;
+            const material = document.getElementById('material').value;
+            const color = document.getElementById('color').value;
+            const quantity = document.getElementById('quantity').value;
+            const compImage = document.getElementById('comp-image').value;
+
+            const formData = new FormData();
+            formData.append('comp_Name', compName);
+            formData.append('comp_Type', compType);
+            formData.append('material', material);
+            formData.append('color', color);
+            formData.append('quantity', quantity);
+            formData.append('image', compImage);
+
+
+            for (const [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+            try {
+                const response = await fetch('http://localhost:5000/api/components', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Component successfully added:', data);
+                    document.getElementById('add-component-form').reset();
+                    closePopup('add-component-popup');
+                } else {
+                    const errorData = await response.json();
+                    console.error('Error adding component:', errorData);
+                    popUp('Failed to add component. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                popUp('Something went wrong. Please try again.');
+            }
+        });
+
+
+        async function loadComponents() {
+            try {
+                const response = await fetch('http://localhost:5000/api/components');
+                const components = await response.json();
+                const tbody = document.getElementById('components-table-body');
+                tbody.innerHTML = components.map(component => `
+                    <tr>
+                        <td>${component.comp_ID}</td>
+                        <td>${component.comp_Name}</td>
+                        <td>${component.comp_Type}</td>
+                        <td>${component.material}</td>
+                        <td>${component.color}</td>
+                        <td><img src="${component.image}" alt="${component.comp_name}"></td>
+                        <td>${component.quantity}</td>
+                        <td>
+                            <button onclick="openPopup('edit-component-popup')">Edit</button>
+                            <button onclick="deleteComponent(${component.comp_ID})">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('http://localhost:5000/api/products');
+                const products = await response.json();
+                const tbody = document.getElementById('products-table-body');
+                tbody.innerHTML = products.map(product => `
+                    <tr>
+                        <td>${product.prod_id}</td>
+                        <td>${product.prod_name}</td>
+                        <td>${product.prod_type}</td>
+                        <td>${product.description}</td>
+                        <td>${product.prod_price}</td>
+                        <td>${product.quantity}</td>
+                        <td><img src="${product.Image}" alt="${product.prod_name}"></td>
+                        <td>
+                            <button onclick="openPopup('edit-product-popup')">Edit</button>
+                            <button onclick="deleteProduct(${product.prod_id})">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        async function loadProfile() {
+            try {
+                const decodedToken = parseJwt(authToken);
+                const userId = decodedToken.user_ID;
+                const response = await fetch(`http://localhost:5000/api/user/${userId}`);
+                const user = await response.json();
+                console.log(user.address);
+                const tbody = document.getElementById('profile-table-body');
+                tbody.innerHTML = `
+                    <tr>
+                        <td>${user.user_ID}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.phone}</td>
+                        <td>${user.Address}</td>
+                        <td>
+                            <button onclick="editUser(${user.user_ID})">Edit</button>
+                            <button onclick="deleteUser(${user.user_ID})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+
+        }
+
+
+        async function loadOrders() {
+            try {
+                const response = await fetch('http://localhost:5000/api/Activeorders');
+                const orders = await response.json();
+                console.log(orders);
+
+                const orderBody = document.getElementById('order-Table-Body');
+                const orderCount = document.getElementById('order-count');
+                orderBody.innerHTML = '';
+
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                <td>${order.orderID}</td> 
+                <td>${order.user_ID}</td> 
+                <td>${order.prod_id}</td>
+                <td>${order.order_date}</td>
+                <td>${order.status}</td>
+                <td>R${order.TotalCost}</td>
+            
+                <td>
+                    <button class="view-btn"  onclick="viewOrder(${order.orderID})">View Order</button>
+                </td>`;
+
+                    orderBody.appendChild(row);
+                });
+
+                orderCount.textContent = `Total Orders: ${orders.length}`;
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+
+        function viewOrder(orderId) {
+            console.log("Viewing Order ID:", orderId);
+
+            fetch(`http://localhost:5000/api/GetoneOrder/${orderId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error fetching order: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const order = data[0];
+                    document.getElementById("order-id").textContent = order.orderID;
+                    const orderStatusElement = document.getElementById("status");
+                    orderStatusElement.textContent = order.status;
+
+                    let prodData;
+                    try {
+                        prodData = JSON.parse(order.prod_id);
+                        console.log("Parsed Product Data:", prodData);
+                    } catch (error) {
+                        console.error("Error parsing prod_id:", error);
+                        alert("Product data is invalid.");
+                        return;
+                    }
+
+                    if (Array.isArray(prodData) && prodData.length > 0) {
+                        const firstProduct = prodData[0];
+                        const quantity = firstProduct.quantity;
+                        const productId = firstProduct.prod_id;
+
+                        console.log("Quantity:", quantity);
+                        console.log("Product ID:", productId);
+
+                        document.getElementById("quantity").textContent = quantity || "Quantity not available";
+
+                        document.getElementById("quant").textContent = quantity;
+                        document.getElementById("total-price").textContent = `R${order.TotalCost}`;
+                        document.getElementById("date").textContent = order.order_date || "No specified Date.";
+
+                        fetch(`http://localhost:5000/api/products/${productId}`)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`Error fetching product: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(productData => {
+                                if (productData) {
+                                    document.getElementById("prod_name").textContent = productData.prod_name || "Unknown Product";
+                                    console.log("Fetched Product Name:", productData.prod_name);
+                                    //document.getElementById("prod_name").textContent = productData.prod_name;
+                                    document.getElementById("order-image").src = productData.Image || '';
+                                    document.getElementById("order-image").style.display = productData.Image ? "block" : "none";
+                                } else {
+                                    document.getElementById("product-name").textContent = "Unknown Product";
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Failed to fetch product:", error);
+                                document.getElementById("product-name").textContent = "Unknown Product";
+                            });
+
+                        const componentsContainer = document.getElementById("components");
+                        componentsContainer.innerHTML = '';
+
+                        prodData.forEach(item => {
+                            let compDetails;
+                            try {
+                                compDetails = JSON.parse(item.components);
+                            } catch (error) {
+                                console.error("Error parsing components:", error);
+                                alert("Components data is invalid.");
+                                return;
+                            }
+
+                            const componentInfo = document.createElement("div");
+                            componentInfo.className = "component";
+                            componentInfo.innerHTML = `
+                        <img src="${compDetails.image || ''}" alt="Component Image" style="width: 50px; height: auto;">
+                        <span>Material: ${compDetails.material}, Color: ${compDetails.color}</span>
+                    `;
+                            componentsContainer.appendChild(componentInfo);
+                        });
+
+
+                        modal.style.display = "block";
+                    } else {
+                        console.error("Parsed product data is missing or invalid.");
+                        alert("Product data is missing or invalid.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Failed to fetch order details:", error);
+                    alert("Failed to fetch order details. Please try again later.");
+                });
+        }
+
+
+
+
+
+        // Function to update order status
+        async function updateOrderStatus(orderID, newStatus) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/updateOrderStatus/${orderID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                if (!response.ok) {
+                    throw new Error('Error updating order status');
+                }
+                console.log('Order status updated successfully');
+                document.getElementById("status").textContent = newStatus; // Update the displayed status
+            } catch (error) {
+                console.error('Error updating order status:', error);
+            }
+        }
+
+        // Event listener for the update status button
+        document.getElementById("update-status-button").addEventListener("click", function () {
+            const orderID = document.getElementById("order-id").textContent; // Get the order ID from the modal
+            const newStatus = document.getElementById("status-dropdown").value; // Get the selected status from dropdown
+            updateOrderStatus(orderID, newStatus); // Call the update function
+        });
+
+        document.querySelector(".close").onclick = function () {
+            const modal = document.getElementById("orderModal");
+            modal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            const modal = document.getElementById("orderModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+
+        function filterOrders() {
+            const searchValue = document.getElementById('searchBar').value.toLowerCase();
+            const filteredOrders = orders.filter(order =>
+                order.customer.toLowerCase().includes(searchValue) ||
+                order.product.toLowerCase().includes(searchValue)
+            );
+
+            const orderBody = document.getElementById('order-Table-Body');
+            orderBody.innerHTML = '';
+
+            filteredOrders.forEach(order => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+      <td>${order.orderID}</td>
+      <td>${order.customer}</td>
+      <td>${order.product}</td>
+      <td>${order.date}</td>
+      <td>${order.status}</td>
+      <td>$${order.totalCost.toFixed(2)}</td>
+    `;
+
+                orderBody.appendChild(row);
+            });
+
+            document.getElementById('order-count').textContent = `Total Orders: ${filteredOrders.length}`;
+        }
+
+
+
+        // Initial load
+        loadComponents();
+        loadProducts();
+        loadProfile();
+        loadOrders()
+    </script>
+</body>
+
+</html>

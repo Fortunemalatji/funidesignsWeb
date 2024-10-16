@@ -91,6 +91,8 @@ header .profile-icon img {
 .featured-products {
     padding: 60px 20px;
     background-color: #F5F5DC;
+
+
 }
 
 .featured-products h2 {
@@ -100,10 +102,11 @@ header .profile-icon img {
     color: #1f2937;
 }
 
-.product-grid {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+
+.product-grids {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 30px; 
 }
 
 .product {
@@ -673,21 +676,14 @@ footer {
 }
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Black w/ opacity */
+    background-color: #a3a3a3;
 }
 
 .modal-content {

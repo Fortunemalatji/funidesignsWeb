@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting and Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .analytics-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .analytics-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .report-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .report-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex-basis: 48%;
+        }
+
+        .report-card h4 {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .summary-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .summary-section h3 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .report-section {
+                flex-wrap: wrap;
+            }
+
+            .report-card {
+                flex-basis: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="analytics-container">
+    <h2 class="analytics-title">Reporting and Analytics</h2>
+
+    <!-- Summary Section -->
+    <div class="summary-section">
+        <h3>Inventory Management Insights</h3>
+        <div class="summary-item">Total Products in Stock: 850</div>
+        <div class="summary-item">Out of Stock Items: 10</div>
+        <div class="summary-item">Total Sales This Month: R 150,000</div>
+    </div>
+
+    <!-- Reports Section -->
+    <div class="report-section">
+        <div class="report-card">
+            <h4>Stock Levels by Product</h4>
+            <canvas id="stock-levels-chart"></canvas>
+        </div>
+
+        <div class="report-card">
+            <h4>Component Popularity</h4>
+            <canvas id="component-popularity-chart"></canvas>
+        </div>
+    </div>
+
+    <div class="report-section">
+        <div class="report-card">
+            <h4>Sales Trends (Monthly)</h4>
+            <canvas id="sales-trends-chart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Stock Levels by Product Chart (Bar)
+    const ctx1 = document.getElementById('stock-levels-chart').getContext('2d');
+    const stockLevelsChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+            datasets: [{
+                label: 'Stock Levels',
+                data: [120, 80, 50, 150],
+                backgroundColor: ['#36a2eb', '#ff6384', '#ffce56', '#4bc0c0'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Component Popularity Chart (Pie)
+    const ctx2 = document.getElementById('component-popularity-chart').getContext('2d');
+    const componentPopularityChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Component X', 'Component Y', 'Component Z'],
+            datasets: [{
+                data: [40, 35, 25],
+                backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Sales Trends Chart (Line)
+    const ctx3 = document.getElementById('sales-trends-chart').getContext('2d');
+    const salesTrendsChart = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Sales (R)',
+                data: [30000, 45000, 38000, 52000, 48000, 60000],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: '#36a2eb',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
